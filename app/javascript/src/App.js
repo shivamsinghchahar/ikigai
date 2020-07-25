@@ -1,9 +1,24 @@
 import React from "react";
 
-import "stylesheets/App.css";
+import "stylesheets/application";
+import RailsLogo from "images/rails";
+import ReactLogo from "images/react";
+import TailwindLogo from "images/tailwind";
 
 const App = () => {
-  return <h1>👋 Welcome to Rails API 💎 + React ⚛️</h1>;
+  return (
+    <div className="min-h-screen text-gray-800 flex flex-col items-center">
+      <h1 className="py-6 text-2xl text-center">
+        👋 Welcome to Rails API 💎 + React ⚛️ + Tailwind 🌊
+      </h1>
+      <img className="w-1/3 my-0 mx-auto" src={RailsLogo} />
+      <div className="w-3/5 p-6 flex justify-around items-center">
+        <img className="w-1/4" src={ReactLogo} />
+        <span className="text-6xl self-start">+</span>
+        <img className="w-1/4" src={TailwindLogo} />
+      </div>
+    </div>
+  );
 };
 
 export default App;

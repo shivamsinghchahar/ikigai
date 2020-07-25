@@ -7,7 +7,7 @@ environment.plugins.append(
   'html',
   new HtmlWebpackPlugin({
     alwaysWriteToDisk: true,
-    title: "Rails API + React"
+    title: "Rails API + React + Tailwind"
   })
 )
 

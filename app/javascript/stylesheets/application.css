@@ -1,0 +1,12 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+
+/*! purgecss start ignore */
+
+body {
+  @apply bg-gray-200;
+  @apply min-h-screen;
+}
+/* ! purgecss end ignore */
+
+@import "tailwindcss/utilities";
