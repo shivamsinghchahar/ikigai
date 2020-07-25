@@ -6,7 +6,8 @@ const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin')
 environment.plugins.append(
   'html',
   new HtmlWebpackPlugin({
-    alwaysWriteToDisk: true
+    alwaysWriteToDisk: true,
+    title: "Rails API + React"
   })
 )
 
