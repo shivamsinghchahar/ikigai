@@ -40,6 +40,12 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+
+  # Patch-level verification for Bundler.
+  gem "bundler-audit", require: false
+
+  # vulnerabity checker for Ruby itself.
+  gem "ruby_audit", require: false
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
