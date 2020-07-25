@@ -54,7 +54,7 @@ jobs:
       - run: bundle exec rake db:create db:schema:load --trace
 
       # Yarn install
-      - run: bin/yarn install --cache-folder vendor/node_modules
+      - run: /usr/local/bin/yarn install --cache-folder vendor/node_modules
 
       # Store yarn cache
       - save_cache:
