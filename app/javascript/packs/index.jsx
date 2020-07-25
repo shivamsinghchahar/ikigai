@@ -3,5 +3,7 @@ import { render } from "react-dom";
 import App from "src/App";
 
 document.addEventListener("DOMContentLoaded", () => {
-  render(<App />, document.body.appendChild(document.createElement("div")));
+  const app = document.createElement("div");
+  app.classList.add("app");
+  render(<App />, document.body.appendChild(app));
 });
