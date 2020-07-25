@@ -7,10 +7,9 @@ import TailwindLogo from "images/tailwind";
 
 const App = () => {
   return (
-    <div className="min-h-screen text-gray-800 flex flex-col items-center">
-      <h1 className="py-6 text-2xl text-center">
-        👋 Welcome to Rails API 💎 + React ⚛️ + Tailwind 🌊
-      </h1>
+    <div className="min-h-screen text-gray-700 flex flex-col items-center">
+      <h1 className="pt-6 text-5xl text-center tracking-widest">IKIGAI</h1>
+      <p className="pb-1 border-b text-lg tracking-wider">Rails API 💎 + React ⚛️ + Tailwind 🌊</p>
       <img className="w-1/3 my-0 mx-auto" src={RailsLogo} />
       <div className="w-3/5 p-6 flex justify-around items-center">
         <img className="w-1/4" src={ReactLogo} />

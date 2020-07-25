@@ -1,19 +1,16 @@
-const { environment } = require('@rails/webpacker')
+const { environment } = require("@rails/webpacker");
 
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin')
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const HtmlWebpackHarddiskPlugin = require("html-webpack-harddisk-plugin");
 
 environment.plugins.append(
-  'html',
+  "html",
   new HtmlWebpackPlugin({
     alwaysWriteToDisk: true,
-    title: "Rails API + React + Tailwind"
+    title: "IKIGAI",
   })
-)
+);
 
-environment.plugins.append(
-  'html-harddisk',
-  new HtmlWebpackHarddiskPlugin()
-)
+environment.plugins.append("html-harddisk", new HtmlWebpackHarddiskPlugin());
 
-module.exports = environment
+module.exports = environment;
