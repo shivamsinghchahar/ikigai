@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resource :sessions, only: %i[create show]
+      resource :session, only: %i[create show]
       resources :users, only: %i[create show destroy]
     end
   end
