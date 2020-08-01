@@ -1,4 +1,4 @@
-require 'test_helper'
+require "test_helper"
 
 class AuthManager::UserAuthorizerTest < ActiveSupport::TestCase
   setup do
@@ -6,14 +6,14 @@ class AuthManager::UserAuthorizerTest < ActiveSupport::TestCase
     @auth_token = JsonWebToken.encode({ user_id: @user.id })
   end
 
-  test 'should decode token' do
+  test "should decode token" do
     response = AuthManager::UserAuthorizer.call(headers(@user))
 
-    assert_equal @user.id, response['user_id']
+    assert_equal @user.id, response["user_id"]
   end
 
-  test 'should return nil if token is invalid' do
-    headers = { 'Authorization' => "Bearer #{@auth_token}invlaid" }
+  test "should return nil if token is invalid" do
+    headers = { "Authorization" => "Bearer #{@auth_token}invlaid" }
     response = AuthManager::UserAuthorizer.call(headers)
 
     assert_not response

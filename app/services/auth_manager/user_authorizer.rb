@@ -11,15 +11,14 @@ module AuthManager
     end
 
     private
+      def token
+        return unless @headers["Authorization"].present?
 
-    def token
-      return unless @headers['Authorization'].present?
+        @headers["Authorization"].split(" ").last
+      end
 
-      @headers['Authorization'].split(' ').last
-    end
-
-    def verify_token
-      JsonWebToken.verify(token) if token
-    end
+      def verify_token
+        JsonWebToken.verify(token) if token
+      end
   end
 end

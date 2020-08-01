@@ -33,7 +33,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'byebug', platforms: %i[mri mingw x64_mingw]
   # Factory bot for tests
   gem 'factory_bot_rails'
 end
@@ -45,13 +45,18 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
 
   # Patch-level verification for Bundler.
-  gem "bundler-audit", require: false
+  gem 'bundler-audit', require: false
+
+  # A Ruby static code analyzer, based on the community Ruby style guide
+  gem 'rubocop', require: false
+  gem 'rubocop-performance'
+  gem 'rubocop-rails'
 
   # vulnerabity checker for Ruby itself.
-  gem "ruby_audit", require: false
+  gem 'ruby_audit', require: false
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 gem 'rename'
