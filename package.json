@@ -12,7 +12,19 @@
     "react_ujs": "^2.6.1",
     "tailwindcss": "^1.5.2"
   },
+  "scripts": {
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "app/**/*.{js,es6,jsx}": [
+      "./node_modules/prettier/bin-prettier.js --trailing-comma --single-quote es5 --write",
+      "git add"
+    ]
+  },
   "devDependencies": {
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.11",
+    "prettier": "^2.0.5",
     "webpack-dev-server": "^3.11.0"
   }
 }
