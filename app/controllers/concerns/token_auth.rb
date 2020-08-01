@@ -5,10 +5,10 @@ module TokenAuth
     user = AuthManager::UserAuthorizer.call(request.headers)
 
     if user
-      user_id = user['user_id'] if user
+      user_id = user["user_id"] if user
       @current_user = User.find_by(id: user_id)
     else
-      render json: { error: 'You need to login' }, status: :unauthorized
+      render json: { error: "You need to login" }, status: :unauthorized
     end
   end
 end
