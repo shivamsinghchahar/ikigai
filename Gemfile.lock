@@ -73,6 +73,11 @@ GEM
     crass (1.0.6)
     erubi (1.9.0)
     execjs (2.7.0)
+    factory_bot (6.0.2)
+      activesupport (>= 5.0.0)
+    factory_bot_rails (6.0.0)
+      factory_bot (~> 6.0.0)
+      railties (>= 5.0.0)
     ffi (1.13.1)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
@@ -183,6 +188,7 @@ DEPENDENCIES
   bootsnap (>= 1.4.2)
   bundler-audit
   byebug
+  factory_bot_rails
   jwt
   listen (~> 3.2)
   pg (>= 0.18, < 2.0)
