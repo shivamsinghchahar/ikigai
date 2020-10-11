@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'home#index', as: :home
+  root "home#index", as: :home
 
   namespace :api do
     namespace :v1 do
@@ -8,5 +8,5 @@ Rails.application.routes.draw do
     end
   end
 
-  get '*path', to: 'home#index', via: :all
+  get "*path", to: "home#index", via: :all
 end

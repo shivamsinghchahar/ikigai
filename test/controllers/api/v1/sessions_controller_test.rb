@@ -27,7 +27,7 @@ class Api::V1::SessionsControllerTest < ActionDispatch::IntegrationTest
     get api_v1_session_path, headers: headers(@user)
 
     assert_response :success
-    assert_equal @user.id, response.parsed_body["id"]
+    assert_equal @user.id, response.parsed_body["user"]["id"]
   end
 
   test "show should return error for invalid token" do

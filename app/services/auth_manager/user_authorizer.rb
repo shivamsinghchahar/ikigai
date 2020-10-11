@@ -12,9 +12,9 @@ module AuthManager
 
     private
       def token
-        return unless @headers["Authorization"].present?
+        return unless headers["Authorization"].present?
 
-        @headers["Authorization"].split(" ").last
+        headers["Authorization"].split(" ").last
       end
 
       def verify_token
