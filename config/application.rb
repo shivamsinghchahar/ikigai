@@ -1,4 +1,4 @@
-require_relative 'boot'
+require_relative "boot"
 
 require "rails"
 # Pick the frameworks you want:
@@ -20,7 +20,7 @@ Bundler.require(*Rails.groups)
 module Ikigai
   class Application < Rails::Application
     config.load_defaults 6.0
-    config.autoload_paths << Rails.root.join('lib')
+    config.autoload_paths << Rails.root.join("lib")
     config.generators do |g|
       g.orm :active_record, primary_key_type: :uuid
     end

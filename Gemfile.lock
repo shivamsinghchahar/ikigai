@@ -111,6 +111,8 @@ GEM
     puma (4.3.6)
       nio4r (~> 2.0)
     rack (2.2.3)
+    rack-protection (2.1.0)
+      rack
     rack-proxy (0.6.5)
       rack
     rack-test (1.1.0)
@@ -152,6 +154,7 @@ GEM
       execjs
       railties (>= 3.2)
       tilt
+    redis (4.1.4)
     regexp_parser (1.8.1)
     rename (1.0.6)
       activesupport
@@ -180,6 +183,11 @@ GEM
     ruby_audit (1.3.0)
       bundler-audit (~> 0.7.0)
     semantic_range (2.3.0)
+    sidekiq (6.0.5)
+      connection_pool (>= 2.2.2)
+      rack (~> 2.0)
+      rack-protection (>= 2.0.0)
+      redis (>= 4.1.0)
     spring (2.1.1)
     spring-watcher-listen (2.0.1)
       listen (>= 2.7, < 4.0)
@@ -222,11 +230,13 @@ DEPENDENCIES
   puma (~> 4.1)
   rails (~> 6.0.3, >= 6.0.3.2)
   react-rails
+  redis (= 4.1.4)
   rename
   rubocop
   rubocop-performance
   rubocop-rails
   ruby_audit
+  sidekiq (= 6.0.5)
   spring
   spring-watcher-listen (~> 2.0.0)
   tzinfo-data
