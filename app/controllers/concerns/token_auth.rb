@@ -1,6 +1,10 @@
 module TokenAuth
   extend ActiveSupport::Concern
 
+  included do
+    before_action :load_user_using_token
+  end
+
   def load_user_using_token
     user = AuthManager::UserAuthorizer.call(request.headers)
 

@@ -2,18 +2,18 @@ class Api::V1::SessionsController < ApplicationController
   skip_before_action :load_user_using_token, only: :create
 
   def create
-    response = AuthManager::UserAuthenticator.call(session_params[:email], session_params[:password])
+    response = AuthManager::UserAuthenticator.call(session_params)
 
     if response.success?
       auth_token = JsonWebToken.encode({ user_id: response.user.id })
-      render json: { auth_token: auth_token, user: response.user }
+      render json: { auth_token: auth_token, user: response.user.as_json(except: :password_digest) }
     else
       render json: { errors: response.errors }, status: :unprocessable_entity
     end
   end
 
   def show
-    render json: @current_user
+    render json: { user: @current_user.as_json(except: :password_digest) }
   end
 
   private

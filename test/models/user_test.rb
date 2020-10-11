@@ -107,4 +107,13 @@ class UserTest < ActiveSupport::TestCase
     assert_not @user.valid?
     assert_equal ["can't be blank"], @user.errors[:password]
   end
+
+  test "user should have a valid role" do
+    invalid_role = "none"
+
+    error = assert_raises ArgumentError do
+      @user.role = invalid_role
+    end
+    assert_equal "'#{invalid_role}' is not a valid role", error.message
+  end
 end
