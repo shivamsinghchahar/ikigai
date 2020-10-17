@@ -12,7 +12,7 @@ class Api::V1::SessionsControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :success
     json = response.parsed_body
-    assert_equal %w[auth_token user].sort, json.keys.sort
+    assert_equal %w[auth_token is_admin user].sort, json.keys.sort
   end
 
   test "create should return error for invalid credentials" do
