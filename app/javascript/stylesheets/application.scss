@@ -4,8 +4,7 @@
 /*! purgecss start ignore */
 
 body {
-  @apply bg-gray-200;
-  @apply antialiased;
+  @apply min-h-screen bg-cool-gray-200 antialiased text-cool-gray-700;
 }
 /* ! purgecss end ignore */
 

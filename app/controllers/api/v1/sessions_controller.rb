@@ -6,7 +6,9 @@ class Api::V1::SessionsController < ApplicationController
 
     if response.success?
       auth_token = JsonWebToken.encode({ user_id: response.user.id })
-      render json: { auth_token: auth_token, user: response.user.as_json(except: :password_digest) }
+      render json: { auth_token: auth_token,
+                    user: response.user.as_json(except: :password_digest),
+                    is_admin: response.user.administrator? }
     else
       render json: { errors: response.errors }, status: :unprocessable_entity
     end
