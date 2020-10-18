@@ -10,7 +10,7 @@ class Api::V1::SessionsController < ApplicationController
                     user: response.user.as_json(except: :password_digest),
                     is_admin: response.user.administrator? }
     else
-      render json: { errors: response.errors }, status: :unprocessable_entity
+      render json: { error: response.error }, status: :unprocessable_entity
     end
   end
 

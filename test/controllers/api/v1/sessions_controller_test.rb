@@ -20,7 +20,7 @@ class Api::V1::SessionsControllerTest < ActionDispatch::IntegrationTest
     post api_v1_session_path, params: @session_params
 
     assert_response :unprocessable_entity
-    assert_equal ["Invalid credentials"], response.parsed_body["errors"]["authentication"]
+    assert_equal "Incorrect email or password", response.parsed_body["error"]
   end
 
   test "show should return the current user" do

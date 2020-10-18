@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import classNames from "classnames";
 
 import { AuthLayout } from "layouts";
+import { Toast } from "components/ui";
 
 import { signup } from "apis/user";
 
@@ -34,6 +35,7 @@ const Signup = () => {
       });
       authDispatch({ type: "LOGIN", payload: { ...data, is_admin: false } });
       userDispatch({ type: "SET_USER", payload: data });
+      Toast.success("Successfully signed up");
     } catch (error) {
       console.dir(error.response.data.errors);
     } finally {
