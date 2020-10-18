@@ -2,6 +2,8 @@
 @import "tailwindcss/components";
 
 /*! purgecss start ignore */
+@import "react-toastify/dist/ReactToastify.css";
+@import "toast/toast";
 
 body {
   @apply min-h-screen bg-cool-gray-200 antialiased text-cool-gray-700;

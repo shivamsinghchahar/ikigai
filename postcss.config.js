@@ -16,6 +16,7 @@ if (["production", "staging"].includes(process.env.RAILS_ENV)) {
   environment.plugins.push(
     require("@fullhuman/postcss-purgecss")({
       content: ["./app/javascript/**/*.js", "./app/javascript/**/*.jsx"],
+      whitelistPatterns: [/Toastify/],
       defaultExtractor: (content) => content.match(/[A-Za-z0-9-_:/]+/g) || [],
     })
   );

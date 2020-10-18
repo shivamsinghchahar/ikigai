@@ -12,7 +12,7 @@ module AuthManager
       if user && user.authenticate(password)
         OpenStruct.new(success?: true, user: user)
       else
-        OpenStruct.new(success?: false, errors: { authentication: ["Invalid credentials"] })
+        OpenStruct.new(success?: false, error: "Incorrect email or password")
       end
     end
   end

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import classNames from "classnames";
 
 import { AuthLayout } from "layouts";
+import { Toast } from "components/ui";
 
 import { login } from "apis/auth";
 
@@ -30,8 +31,10 @@ const Login = () => {
       });
       authDispatch({ type: "LOGIN", payload: data });
       userDispatch({ type: "SET_USER", payload: data });
+      Toast.success("Successfully logged in");
     } catch (error) {
-      console.log(error);
+      const message = error.response?.data?.error;
+      message && Toast.error(message);
     } finally {
       setLoading(false);
     }
@@ -44,6 +47,7 @@ const Login = () => {
           <div>
             <input
               aria-label="Email address"
+              aria-required="true"
               name="email"
               type="email"
               autoFocus
@@ -57,6 +61,7 @@ const Login = () => {
           <div className="-mt-px">
             <input
               aria-label="Password"
+              aria-required="true"
               name="password"
               type="password"
               required

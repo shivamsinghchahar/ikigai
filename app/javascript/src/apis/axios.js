@@ -1,5 +1,7 @@
 import axios from "axios";
 
+import { Toast } from "components/ui";
+
 const http = axios.create({
   baseURL: "/api/v1",
   headers: {
@@ -33,7 +35,12 @@ http.interceptors.response.use(
   },
   error => {
     // Any status codes that falls outside the range of 2xx cause this function to trigger
-    // Do something with response error
+    const status = error.response.status;
+
+    if (status == 500 || status > 500) {
+      Toast.error("Oops! Something went wrong");
+    }
+
     return Promise.reject(error);
   }
 );
