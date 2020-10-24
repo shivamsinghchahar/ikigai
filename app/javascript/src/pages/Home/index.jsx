@@ -1,5 +1,7 @@
 import React from "react";
 
+import { Toast } from "components/ui";
+
 import { useUser } from "contexts/user";
 import { useAuthDispatch } from "contexts/auth";
 
@@ -10,6 +12,7 @@ const Home = () => {
   const handleLogout = () => {
     authDispatch({ type: "LOGOUT" });
     userDispatch({ type: "SET_USER", payload: { user: null } });
+    Toast.info("See you again 👋");
   };
 
   return (

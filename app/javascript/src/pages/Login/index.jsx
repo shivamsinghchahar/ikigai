@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useForm } from "react-hook-form";
 import classNames from "classnames";
 
 import { AuthLayout } from "layouts";
@@ -10,28 +11,23 @@ import { useAuthDispatch } from "contexts/auth";
 import { useUserDispatch } from "contexts/user";
 
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [remember, setRemember] = useState(false);
   const [loading, setLoading] = useState(false);
+  const { register, handleSubmit } = useForm();
 
   const authDispatch = useAuthDispatch();
   const userDispatch = useUserDispatch();
 
-  const handleSubmit = async event => {
-    event.preventDefault();
+  const onSubmit = async loginData => {
     try {
       setLoading(true);
       const { data } = await login({
         user: {
-          email,
-          password,
-          remember_me: remember,
+          ...loginData,
         },
       });
       authDispatch({ type: "LOGIN", payload: data });
       userDispatch({ type: "SET_USER", payload: data });
-      Toast.success("Successfully logged in");
+      Toast.success("Successfully logged in 🎉");
     } catch (error) {
       const message = error.response?.data?.error;
       message && Toast.error(message);
@@ -42,7 +38,7 @@ const Login = () => {
 
   return (
     <AuthLayout>
-      <form className="mt-8" onSubmit={handleSubmit}>
+      <form className="mt-8" onSubmit={handleSubmit(onSubmit)}>
         <div className="rounded-md shadow-sm">
           <div>
             <input
@@ -54,8 +50,7 @@ const Login = () => {
               required
               className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:shadow-outline-indigo focus:border-indigo-300 focus:z-10 sm:text-sm sm:leading-5"
               placeholder="Email address"
-              value={email}
-              onChange={e => setEmail(e.target.value)}
+              ref={register({ required: true })}
             />
           </div>
           <div className="-mt-px">
@@ -67,8 +62,7 @@ const Login = () => {
               required
               className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:shadow-outline-indigo focus:border-indigo-300 focus:z-10 sm:text-sm sm:leading-5"
               placeholder="Password"
-              value={password}
-              onChange={e => setPassword(e.target.value)}
+              ref={register({ required: true })}
             />
           </div>
         </div>
@@ -77,10 +71,10 @@ const Login = () => {
           <div className="flex items-center">
             <input
               id="remember_me"
+              name="remember_me"
               type="checkbox"
               className="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out"
-              value={remember}
-              onChange={e => setRemember(e.target.checked)}
+              ref={register}
             />
             <label
               htmlFor="remember_me"
