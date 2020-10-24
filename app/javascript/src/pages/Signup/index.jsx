@@ -1,8 +1,9 @@
 import React, { useState } from "react";
+import { useForm } from "react-hook-form";
 import classNames from "classnames";
 
 import { AuthLayout } from "layouts";
-import { Toast } from "components/ui";
+import { Toast, FormField } from "components/ui";
 
 import { signup } from "apis/user";
 
@@ -10,34 +11,26 @@ import { useAuthDispatch } from "contexts/auth";
 import { useUserDispatch } from "contexts/user";
 
 const Signup = () => {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [passwordConfirmation, setPasswordConfirmation] = useState("");
   const [loading, setLoading] = useState(false);
+  const [errors, setErrors] = useState(null);
+  const { register, handleSubmit } = useForm();
 
   const authDispatch = useAuthDispatch();
   const userDispatch = useUserDispatch();
 
-  const handleSubmit = async event => {
-    event.preventDefault();
+  const onSubmit = async signupData => {
     try {
       setLoading(true);
       const { data } = await signup({
         user: {
-          first_name: firstName,
-          last_name: lastName,
-          email,
-          password,
-          password_confirmation: passwordConfirmation,
+          ...signupData,
         },
       });
       authDispatch({ type: "LOGIN", payload: { ...data, is_admin: false } });
       userDispatch({ type: "SET_USER", payload: data });
-      Toast.success("Successfully signed up");
+      Toast.success("Successfully signed up 🎉");
     } catch (error) {
-      console.dir(error.response.data.errors);
+      setErrors(error.response.data.errors);
     } finally {
       setLoading(false);
     }
@@ -45,107 +38,61 @@ const Signup = () => {
 
   return (
     <AuthLayout>
-      <form className="mt-8" onSubmit={handleSubmit}>
-        <div>
-          <label
-            htmlFor="first_name"
-            className="block text-sm font-medium leading-5 text-gray-700"
-          >
-            First name
-          </label>
-          <div className="mt-1 rounded-md shadow-sm">
-            <input
-              id="first_name"
-              type="text"
-              className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-indigo transition duration-150 ease-in-out sm:text-sm sm:leading-5 focus:border-indigo-300"
-              aria-label="First name"
-              aria-required="true"
-              autoFocus
-              value={firstName}
-              onChange={e => setFirstName(e.target.value)}
-            />
-          </div>
-        </div>
+      <form className="mt-8" onSubmit={handleSubmit(onSubmit)}>
+        <FormField
+          id="first_name"
+          name="first_name"
+          type="text"
+          label="First name"
+          required
+          autoFocus
+          register={register}
+          error={errors?.first_name?.[0]}
+        />
 
-        <div className="mt-6">
-          <label
-            htmlFor="last_name"
-            className="block text-sm font-medium leading-5 text-gray-700"
-          >
-            Last name
-          </label>
-          <div className="mt-1 rounded-md shadow-sm">
-            <input
-              id="last_name"
-              type="text"
-              className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-indigo transition duration-150 ease-in-out sm:text-sm sm:leading-5 focus:border-indigo-300"
-              aria-label="Last Name"
-              aria-required="true"
-              value={lastName}
-              onChange={e => setLastName(e.target.value)}
-            />
-          </div>
-        </div>
+        <FormField
+          wrapperClassName="mt-6"
+          id="last_name"
+          name="last_name"
+          type="text"
+          label="Last name"
+          required
+          register={register}
+          error={errors?.last_name?.[0]}
+        />
 
-        <div className="mt-6">
-          <label
-            htmlFor="email"
-            className="block text-sm font-medium leading-5 text-gray-700"
-          >
-            Email address
-          </label>
-          <div className="mt-1 rounded-md shadow-sm">
-            <input
-              id="email"
-              type="email"
-              className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-indigo transition duration-150 ease-in-out sm:text-sm sm:leading-5 focus:border-indigo-300"
-              aria-label="Email address"
-              aria-required="true"
-              value={email}
-              onChange={e => setEmail(e.target.value)}
-            />
-          </div>
-        </div>
+        <FormField
+          wrapperClassName="mt-6"
+          id="email"
+          name="email"
+          type="email"
+          label="Email address"
+          required
+          register={register}
+          error={errors?.email?.[0]}
+        />
 
-        <div className="mt-6">
-          <label
-            htmlFor="password"
-            className="block text-sm font-medium leading-5 text-gray-700"
-          >
-            Password
-          </label>
-          <div className="mt-1 rounded-md shadow-sm">
-            <input
-              id="password"
-              type="password"
-              className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-indigo transition duration-150 ease-in-out sm:text-sm sm:leading-5 focus:border-indigo-300"
-              aria-label="Password"
-              aria-required="true"
-              value={password}
-              onChange={e => setPassword(e.target.value)}
-            />
-          </div>
-        </div>
+        <FormField
+          wrapperClassName="mt-6"
+          id="password"
+          name="password"
+          type="password"
+          label="Password"
+          required
+          register={register}
+          error={errors?.password?.[0]}
+        />
 
-        <div className="mt-6">
-          <label
-            htmlFor="password_confirmation"
-            className="block text-sm font-medium leading-5 text-gray-700"
-          >
-            Confirm password
-          </label>
-          <div className="mt-1 rounded-md shadow-sm">
-            <input
-              id="password_confirmation"
-              type="password"
-              className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-indigo transition duration-150 ease-in-out sm:text-sm sm:leading-5 focus:border-indigo-300"
-              aria-label="Confirm password"
-              aria-required="true"
-              value={passwordConfirmation}
-              onChange={e => setPasswordConfirmation(e.target.value)}
-            />
-          </div>
-        </div>
+        <FormField
+          wrapperClassName="mt-6"
+          id="password_confirmation"
+          name="password_confirmation"
+          type="password"
+          label="Confirm password"
+          required
+          register={register}
+          error={errors?.password_confirmation?.[0]}
+        />
 
         <div className="mt-6">
           <button
@@ -157,6 +104,19 @@ const Signup = () => {
             )}
             disabled={loading}
           >
+            <span className="absolute left-0 inset-y-0 flex items-center pl-3">
+              <svg
+                className="h-5 w-5 text-indigo-500 group-hover:text-indigo-400 transition ease-in-out duration-150"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </span>
             {loading ? "Signing up..." : "Sign up"}
           </button>
         </div>
